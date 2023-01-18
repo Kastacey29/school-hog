@@ -3,6 +3,7 @@ package ru.hogwarts.schoolhog.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.schoolhog.model.Student;
+import ru.hogwarts.schoolhog.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,34 +13,30 @@ import java.util.stream.Collectors;
 @Service
 public class StudentService {
 
-    private final Map<Long, Student> students = new HashMap<>();
-    public static Long lastId = 0L;
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Student createStudent(Student student) {
-        lastId++;
-        students.put(lastId, student);
-        student.setId(lastId);
-        return student;
+        return studentRepository.save(student);
     }
 
     public Student getStudentById(Long studentID) {
-        return students.get(studentID);
+        return studentRepository.findById(studentID).get();
     }
 
     public Student updateStudent(Long id, Student student) {
-        if (students.containsKey(student.getId())) {
-            students.put(student.getId(), student);
-            return student;
-        }
-        return null;
+        return studentRepository.save(student);
     }
 
-    public Student deleteStudentById(Long studentId) {
-        return students.remove(studentId);
+    public void deleteStudentById(Long studentId) {
+        studentRepository.deleteById(studentId);
 
     }
 
-    public Collection<Student> getStudentsByAge(int studentAge) {
-        return students.values().stream().filter(e -> e.getAge() == studentAge).collect(Collectors.toList());
+    public Collection<Student> getStudentsByAge(Integer studentAge) {
+        return studentRepository.findStudentByAge(studentAge);
     }
 }
