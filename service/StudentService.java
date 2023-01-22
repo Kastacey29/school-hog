@@ -39,4 +39,11 @@ public class StudentService {
     public Collection<Student> getStudentsByAge(Integer studentAge) {
         return studentRepository.findStudentByAge(studentAge);
     }
+
+    public Collection<Student> findStudentsByAgeBetween(Integer minAge, Integer maxAge) {
+        return studentRepository.findStudentsByAgeBetween(minAge, maxAge);
+    }
+    public Collection<Student> findStudentsByFacultyId(Long id) {
+        return studentRepository.findStudentsByFacultyId(id);
+    }
 }
