@@ -13,4 +13,3 @@ order by age
 
 select * from student,faculty
 where student.faculty_id = faculty.id
-and student.name='Ron'

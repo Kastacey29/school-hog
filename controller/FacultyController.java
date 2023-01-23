@@ -66,6 +66,6 @@ return ResponseEntity.ok(facultyService.findFacultiesByColorIgnoreCase(color));
 
     @GetMapping("/byStudent/{id}")
     public ResponseEntity<Faculty> findFacultyByStudent(@PathVariable Long id) {
-return ResponseEntity.ok(facultyService.findFacultyByStudentID(id));
+return ResponseEntity.ok(facultyService.findFacultyByStudentId(id));
     }
 }

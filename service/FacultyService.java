@@ -40,9 +40,9 @@ public class FacultyService {
     public Collection<Faculty> findByNameIgnoreCase(String name) {
         return facultyRepository.findByNameIgnoreCase(name);
     }
-    public Faculty findFacultyByStudentID(Long id) {
+    public Faculty findFacultyByStudentId(Long id) {
 
-        return facultyRepository.findFacultyByStudentID(id);
+        return facultyRepository.findFacultyByStudentId(id);
     }
 
 }

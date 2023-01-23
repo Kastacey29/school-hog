@@ -1,5 +1,7 @@
 package ru.hogwarts.schoolhog.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import javax.persistence.OneToMany;
@@ -15,6 +17,7 @@ public class Faculty {
     private String color;
 
     @OneToMany(mappedBy="faculty")
+    @JsonManagedReference
     private Set <Student> students;
 
     public Long getId() {
