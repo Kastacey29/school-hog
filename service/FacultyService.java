@@ -13,9 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class FacultyService {
     private final FacultyRepository facultyRepository;
+    private final StudentService studentService;
 
-    public FacultyService(FacultyRepository facultyRepository) {
+    public FacultyService(FacultyRepository facultyRepository,StudentService studentService) {
         this.facultyRepository = facultyRepository;
+        this.studentService=studentService;
     }
 
     public Faculty createFaculty(Faculty faculty) {
@@ -40,10 +42,11 @@ public class FacultyService {
     public Collection<Faculty> findByNameIgnoreCase(String name) {
         return facultyRepository.findByNameIgnoreCase(name);
     }
-    public Faculty findFacultyByStudentId(Long id) {
-
-        return facultyRepository.findFacultyByStudentId(id);
-    }
+//    public Faculty findFacultyByStudentId(Long id) {
+//
+//return studentService.getStudentById(id).getFaculty();
+//
+//    }
 
 }
 

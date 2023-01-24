@@ -2,6 +2,7 @@ package ru.hogwarts.schoolhog.service;
 
 
 import org.springframework.stereotype.Service;
+import ru.hogwarts.schoolhog.model.Faculty;
 import ru.hogwarts.schoolhog.model.Student;
 import ru.hogwarts.schoolhog.repositories.StudentRepository;
 
@@ -45,5 +46,8 @@ public class StudentService {
     }
     public Collection<Student> findStudentsByFacultyId(Long id) {
         return studentRepository.findStudentsByFacultyId(id);
+    }
+    public Faculty getFacultyByStudentId(Long id) {
+      return   getStudentById(id).getFaculty();
     }
 }

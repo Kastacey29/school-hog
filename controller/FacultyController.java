@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.schoolhog.model.Faculty;
 import ru.hogwarts.schoolhog.model.Student;
+import ru.hogwarts.schoolhog.repositories.StudentRepository;
 import ru.hogwarts.schoolhog.service.FacultyService;
 
 import java.util.Collection;
@@ -64,8 +65,8 @@ return ResponseEntity.ok(facultyService.findFacultiesByColorIgnoreCase(color));
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/byStudent/{id}")
-    public ResponseEntity<Faculty> findFacultyByStudent(@PathVariable Long id) {
-return ResponseEntity.ok(facultyService.findFacultyByStudentId(id));
-    }
+//    @GetMapping("/byStudent/{id}")
+//    public ResponseEntity<Faculty> findFacultyByStudent(@PathVariable Long id) {
+//return ResponseEntity.ok(facultyService.findFacultyByStudentId(id));
+//    }
 }
