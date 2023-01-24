@@ -1,15 +1,15 @@
-select * from student where age<=20 and age>=11
+select * from student where age<=20 and age>=11;
 
-select name from student
-
-select * from student
-where name like '%G%'
+select name from student;
 
 select * from student
-where age<student.id
+where name like '%G%';
 
 select * from student
-order by age
+where age<student.id;
+
+select * from student
+order by age;
 
 select * from student,faculty
 where student.faculty_id = faculty.id

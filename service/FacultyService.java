@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class FacultyService {
     private final FacultyRepository facultyRepository;
-    private final StudentService studentService;
 
-    public FacultyService(FacultyRepository facultyRepository,StudentService studentService) {
+
+    public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
-        this.studentService=studentService;
+
     }
 
     public Faculty createFaculty(Faculty faculty) {
