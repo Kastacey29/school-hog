@@ -13,9 +13,20 @@ public class Student {
     private Long id;
     private String name;
     private Integer age;
+
+    public Student(Long id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Student() {
+    }
+
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "faculty_id")
+
 
     private Faculty faculty;
 
@@ -45,6 +56,10 @@ public class Student {
 
     public Faculty getFaculty() {
         return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
     @Override

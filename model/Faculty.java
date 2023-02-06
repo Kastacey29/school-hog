@@ -20,6 +20,21 @@ public class Faculty {
     @JsonManagedReference
     private Set <Student> students;
 
+    public Faculty() {
+    }
+
+    public Faculty( String name, String color) {
+
+        this.name = name;
+        this.color = color;
+    }
+
+    public Faculty(Long id, String name, String color) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
+    }
+
     public Long getId() {
         return id;
     }
