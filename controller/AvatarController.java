@@ -1,5 +1,7 @@
 package ru.hogwarts.schoolhog.controller;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import ru.hogwarts.schoolhog.model.Avatar;
@@ -17,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/avatar")
@@ -27,23 +30,30 @@ public class AvatarController {
         this.avatarService = avatarService;
     }
 
-    @PostMapping(value = "/{studentId}/avatar",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String>  uploadAvatar(@PathVariable Long studentId, @RequestParam MultipartFile avatar) throws IOException {
+    @PostMapping(value = "/{studentId}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> uploadAvatar(@PathVariable Long studentId, @RequestParam MultipartFile avatar) throws IOException {
         if (avatar.getSize() > 1024 * 300) {
-            ResponseEntity.badRequest().body("File is too big!");}
-            avatarService.uploadAvatar(studentId, avatar);
+            ResponseEntity.badRequest().body("File is too big!");
+        }
+        avatarService.uploadAvatar(studentId, avatar);
         return ResponseEntity.ok().build();
 
     }
+
     @GetMapping(value = "/{id}/avatar/preview")
     public ResponseEntity<byte[]> downloadAvatar(@PathVariable Long id) {
         Avatar avatar = avatarService.findAvatar(id);
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
         headers.setContentLength(avatar.getData().length);
 
-        return  ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+    }
+
+    @GetMapping(value = "/allAvatars")
+    public ResponseEntity<Collection<Avatar>> findAllByPage(@RequestParam ("page") Integer pageNumber,
+                                                            @RequestParam ("size") Integer pageSize) {
+       return ResponseEntity.ok(avatarService.findAll(pageNumber,pageSize));
     }
 
     @GetMapping(value = "/{id}/avatar")

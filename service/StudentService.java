@@ -1,6 +1,7 @@
 package ru.hogwarts.schoolhog.service;
 
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.schoolhog.model.Faculty;
 import ru.hogwarts.schoolhog.model.Student;
@@ -37,8 +38,6 @@ public class StudentService {
 
     }
 
-
-
     public Collection<Student> getStudentsByAge(Integer studentAge) {
         return studentRepository.findStudentByAge(studentAge);
     }
@@ -46,10 +45,24 @@ public class StudentService {
     public Collection<Student> findStudentsByAgeBetween(Integer minAge, Integer maxAge) {
         return studentRepository.findStudentsByAgeBetween(minAge, maxAge);
     }
+
     public Collection<Student> findStudentsByFacultyId(Long id) {
         return studentRepository.findStudentsByFacultyId(id);
     }
+
     public Faculty getFacultyByStudentId(Long id) {
-      return   getStudentById(id).getFaculty();
+        return getStudentById(id).getFaculty();
+    }
+
+    public Integer findCountOfStudent() {
+        return studentRepository.findCountOfStudent();
+    }
+
+    public Double findAverageAge() {
+        return studentRepository.findAverageAge();
+    }
+
+    public Collection<Student> findFiveLastStudents() {
+        return studentRepository.findFiveLastStudents();
     }
 }

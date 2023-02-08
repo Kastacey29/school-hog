@@ -20,9 +20,25 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
+    }
+
+    @GetMapping("/all")
+    public Integer findCountOfStudent() {
+        return studentService.findCountOfStudent();
+    }
+
+    @GetMapping("/avgAge")
+    public Double findAverageAge() {
+        return studentService.findAverageAge();
+    }
+
+    @GetMapping("/fiveLast")
+    public ResponseEntity<Collection<Student>> findFiveLastStudents() {
+        return ResponseEntity.ok(studentService.findFiveLastStudents());
     }
 
     @GetMapping("/{studentId}")
@@ -33,24 +49,25 @@ public class StudentController {
         }
         return ResponseEntity.ok(student);
     }
+
     @GetMapping("/{studentId}/faculty")
     public ResponseEntity<Faculty> getFacultyByStudentId(@PathVariable Long studentId) {
         Faculty resultFaculty = studentService.getFacultyByStudentId(studentId);
         if (resultFaculty == null) {
             return ResponseEntity.notFound().build();
         }
-       return ResponseEntity.ok(resultFaculty);
+        return ResponseEntity.ok(resultFaculty);
     }
 
     @GetMapping
     public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam(required = false) Integer age,
-                                                                @RequestParam (required = false) Integer minAge,
-                                                                @RequestParam (required = false) Integer maxAge) {
-        if (age !=null) {
+                                                                @RequestParam(required = false) Integer minAge,
+                                                                @RequestParam(required = false) Integer maxAge) {
+        if (age != null) {
             return ResponseEntity.ok(studentService.getStudentsByAge(age));
         }
         if (minAge != null && maxAge != null && minAge <= maxAge) {
-            return  ResponseEntity.ok(studentService.findStudentsByAgeBetween(minAge,maxAge));
+            return ResponseEntity.ok(studentService.findStudentsByAgeBetween(minAge, maxAge));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }

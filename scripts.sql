@@ -12,4 +12,11 @@ select * from student
 order by age;
 
 select * from student,faculty
-where student.faculty_id = faculty.id
+where student.faculty_id = faculty.id;
+
+select count(*) from student;
+
+select avg(age) from student;
+select * from student order by id desc limit 5;
+
+select *from avatar;

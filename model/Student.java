@@ -7,9 +7,10 @@ import javax.persistence.JoinColumn;
 import java.util.Objects;
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
