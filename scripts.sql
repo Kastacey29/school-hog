@@ -2,6 +2,8 @@ select * from student where age<=20 and age>=11;
 
 select name from student;
 
+
+
 select * from student
 where name like '%G%';
 
